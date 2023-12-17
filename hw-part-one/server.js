@@ -65,6 +65,51 @@ app.get('/magic/:question', (req, res) => {
     res.send(`<h1>Your Question: ${returnQuestion}. My Answer: ${responseArray[answer]}.</h1>`)
 })
 
+//HUNGRY FOR MORE : FIBONACCI
+
+function perfectSquare(num) {
+    const squareRoot = Math.sqrt(num)
+    return squareRoot * squareRoot === num
+}
+
+function isFibonacci(number) {
+    return perfectSquare(5 * (number * number) + 4) || perfectSquare(5 * (number * number) - 4)
+}
+
+app.get('/fibonacci/:query', (req, res) => {
+    // MY QUESTION : Below I'm experiencing a sometimes-bug when the number is being evaluated to Fibonacci when in truth it isn't. I don't understand why. This is working 2/3 times. I really didn't want to use the 'loop through every number until you hit yours to decide' system because it seems like a less efficient way but I'm getting errors here.
+    let number = parseInt(`${req.params.query}`)
+    if (isFibonacci(number)) {
+        res.send(`<h2>Yes, very good; the number ${number} is indeed Fibonacci.</h2>`)
+    } else {
+        res.send(`<h1>No, you're stupid, that's wrong. ${number} is not Fibonacci.</h1>`)
+    }
+})
+
+function isFibonacci2(number) {
+    let x = 0
+    let y = 1
+
+    while (x < number) {
+        let z = x + y
+        x = y
+        y = z
+    }
+    return x === number
+}
+
+app.get('/fibonacci2/:query', (req, res) => {
+    // Below mehod works. I'm unsure why the other was throwing bugs.
+    let number = parseInt(`${req.params.query}`)
+    if (isFibonacci2(number)) {
+        res.send(`<h2>Yes, very good; the number ${number} is indeed Fibonacci.</h2>`)
+    } else {
+        res.send(`<h1>No, you're stupid, that's wrong. ${number} is not Fibonacci.</h1>`)
+    }
+})
+
+
+
 // routes end
 app.listen(3000, () => {
     console.log("We're live.")
