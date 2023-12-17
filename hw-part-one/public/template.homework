@@ -1,0 +1,8 @@
+<head>
+#title#
+<link rel="stylesheet" href="template.css">
+</head>
+<body>
+<header>#message#</header>
+#content#
+</body>
