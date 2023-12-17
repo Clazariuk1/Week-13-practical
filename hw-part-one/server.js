@@ -54,6 +54,17 @@ app.get('/tip/:total/:percentage', (req, res) => {
     res.send(`So your bill was ${req.params.total} and you want to tip ${req.params.percentage} percent? That's gonna be another ${tipValue}, bringing your grand total up to ${grandTotal} dollars.`)
 })
 
+app.get('/magic', (req, res) => {
+    res.send(`Ask away.`)
+})
+
+app.get('/magic/:question', (req, res) => {
+    const returnQuestion = `${req.params.question}`
+    const responseArray = ["It is Certain", "It is Decidedly So", "Without a Doubt", "Yes, Definitely", "You May Rely on It", "As I See it, Yes", "Most Likely", "Outlook Good", "Yes", "Signs Point to Yes", "Reply Hazy; Try Again", "Ask Again Later", "Better Not Tell You Now", "Cannot Predict Now", "Concentrate and Ask Again", "Don't Count on It", "My Reply is No", "My Sources Say No", "Outlook Not so Good", "Very Doubtful"]
+    let answer = Math.floor(Math.random() * responseArray.length)
+    res.send(`<h1>Your Question: ${returnQuestion}. My Answer: ${responseArray[answer]}.</h1>`)
+})
+
 // routes end
 app.listen(3000, () => {
     console.log("We're live.")
