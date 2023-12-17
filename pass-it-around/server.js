@@ -33,14 +33,41 @@ app.set('view engine', 'homework')
     res.redirect('/99')
 })
 
+// Below : normal code pre-bug adding for bonus.
+// app.get('/:bottles', (req, res) => {
+//     if(parseInt(`${req.params.bottles}`) === 0) {
+//         res.render('template', { title: 'No More Beer!', message: 'all out of beer!!!', content: `<a href="http://localhost:3000">Let's start over and get Krunk again!</a>`})
+//     } else {
+//     res.render('template', { title: '99 Bottles of Beer', message: `${req.params.bottles} bottles of beer on the wall!`, content: `<a href="http://localhost:3000/${req.params.bottles - 1}">Take One Down, Pass it Around...</a>`})
+//     }
+//   })
+
 app.get('/:bottles', (req, res) => {
     if(parseInt(`${req.params.bottles}`) === 0) {
         res.render('template', { title: 'No More Beer!', message: 'all out of beer!!!', content: `<a href="http://localhost:3000">Let's start over and get Krunk again!</a>`})
-    } else {
-    res.render('template', { title: '99 Bottles of Beer', message: `${req.params.bottles} bottles of beer on the wall!`, content: `<a href="http://localhost:3000/${req.params.bottles - 1}">Take One Down, Pass it Around...</a>`})
     }
-  })
+    else {
+        let value = bugMath(`${req.params.bottles}`)
+        res.render('template', { title: '99 Bundles of Bugs', message: `${value} bottles of this efffing POS won't work!`, content: `<a href="http://localhost:3000/${value}">Maybe if you refresh the page...?</a>`})
+    }
+})
 
+function bugMath(num) {
+    let random = Math.floor(Math.random() * 100) + 1
+    let change = parseInt(num);
+    if (random % 3 === 0 && random % 5 === 0) {
+        change *= 2
+    }
+    else if (random % 3 === 0) {
+        change -= 15
+    }
+    else if (random % 5 === 0) {
+        change += 15
+    } else {
+        change -= 1
+    }
+    return change
+}
 
 
 // routes end
